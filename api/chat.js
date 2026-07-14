@@ -1,44 +1,47 @@
 // /api/chat.js
 //
-// Vercel serverless function that proxies chat requests to the Anthropic API.
-// The API key lives server-side (as an environment variable) and is never
-// sent to the browser. The frontend calls this endpoint instead of
-// api.anthropic.com directly.
+// Vercel serverless function that proxies chat requests to a self-hosted
+// Ollama instance running Selene's LoRA fine-tuned Phi-4-mini-instruct model
+// on an Oracle Cloud Always Free Ampere A1 VM, instead of the OpenAI API.
+//
+// Request flow:
+//   Browser -> /api/chat (this file, on Vercel)
+//           -> https://<your-vm-domain>/v1/chat/completions (Caddy -> Ollama, on Oracle)
+//
+// The VM is not meant to be called directly by the browser: this function
+// is the only thing that holds the shared secret that Caddy checks before
+// forwarding to Ollama, so the secret never reaches client JS.
 //
 // Setup:
-//   1. In your Vercel project settings -> Environment Variables, add:
-//        ANTHROPIC_API_KEY = sk-ant-...
-//   2. Deploy. Vercel automatically turns any file in /api into a serverless
-//      function at the matching path, so this becomes: https://yoursite.com/api/chat
+//   1. On the VM: Caddy terminates HTTPS and forwards to Ollama on
+//      localhost:11434, but only when the request carries the header
+//      "X-Api-Key: <OLLAMA_API_SECRET>" (see the Caddyfile in the deployment
+//      guide). This is what stands in for "auth" here — Ollama itself has
+//      no built-in auth, so Caddy is the enforcement point.
+//   2. In Vercel project settings -> Environment Variables, add:
+//        OLLAMA_ENDPOINT   = https://your-vm-domain.example.com/v1/chat/completions
+//        OLLAMA_MODEL      = selene-assistant     (the name from `ollama create selene-assistant -f Modelfile`)
+//        OLLAMA_API_SECRET = <same long random string configured in the Caddyfile>
+//        ALLOWED_ORIGIN    = https://selenechan.dev   (your real deployed domain)
+//   3. Deploy. This becomes https://yoursite.com/api/chat, same as before.
 //
-// The system prompt (Selene's background) is defined here on the server,
-// not in client JS, so it can't be edited or extracted from the browser.
-
-const SYSTEM_PROMPT = `You are an AI assistant embedded on Selene Chan's (Chan Lok Tung, Selene) personal portfolio website. You represent Selene to visitors — recruiters, collaborators, curious people. Speak in first person as if you are Selene's AI representative (say "Selene" in third person when describing her, e.g. "Selene built..." — do not pretend to literally be her as a human). Be warm, concise, and specific. Base every answer on the background below. If asked something outside this scope, say you don't have that information and suggest they email her directly at seleneltchan@gmail.com.
-
-BACKGROUND:
-- AI undergraduate at National University of Singapore (NUS), Class of 2029, GPA 4.3/5.0, majoring in Artificial Intelligence. Coursework: Data Structures & Algorithms, Discrete Structures, Statistical Computing.
-- Currently attending Stanford University's International Honors Program (Jun-Aug 2026): Design & Analysis of Algorithms, Modern Research Methods in Cognitive Science, HCI & AI Seminar.
-- Research Intern, Qiming Venture Partners (Jul-Aug 2025, Hong Kong): investment research on aviation AI (air traffic control, probabilistic digital twins, trajectory prediction, PBN, predictive traffic flow); audited the aviation AI market, identifying high-growth sub-sectors within an estimated $6.4B market; analyzed regulatory risk around aviation AI certification.
-- Group Research Intern, Unicorn Partners (Jul 2025, Hong Kong): benchmarked Gemini 2.5 Pro against OpenAI o3-mini and Claude 3.7 Sonnet on coding and mathematical reasoning; evaluated XR hardware/wearables (Android XR, Apple Vision Pro, Meta Hypernova); built research briefs on Gen AI web products, agentic AI, tourism disruption, consumer tech adoption.
-- Market Research Intern, Gusto Collective (Aug 2023, Hong Kong): analyzed AR/VR data and luxury-branding partnership opportunities.
-- Project: EchoEcho (NUS Orbital 2026, May-Aug 2026) — full-stack misinformation-spread simulation platform helping users understand echo chambers. Features: auth, protected routes, parameterized scenarios, interactive feed, graph-based visualization (Cytoscape.js), scoring, replay, leaderboards. Stack: React, Node.js, Supabase, PostgreSQL, Tailwind CSS, Google Fact Check API, deployed on Vercel.
-- Project: FinTech Personal Finance & Cryptocurrency App (Mar 2023-Jan 2024) — Python-based mobile prototype for personal finance/crypto management, built for a coding, cryptography, and fintech education program for gifted students; designed UI in Figma and presented technical rationale to judges.
-- Skills: Python, SQL, JavaScript, Java, MATLAB, R, React, Node.js, Express, Supabase, PostgreSQL, machine learning, predictive modelling, statistical analysis, Figma, Cytoscape.js, Tailwind CSS, PySide6.
-- Languages: English, Cantonese, Mandarin, Japanese, Korean.
-- Leadership: Local Committee Vice President, Outgoing Global Exchange, AIESEC in NUS (Jan 2026-present) — recruitment, partnership development, project delivery for outgoing global exchange; coordinates cross-cultural teams.
-- Certifications: DataCamp — Introduction to Statistics in R, Introduction to R.
-- Contact: seleneltchan@gmail.com, LinkedIn: linkedin.com/in/sel-ene, based in Hong Kong / Singapore.
-
-Keep answers to 2-4 sentences unless asked for more detail.`;
+// NOTE ON THE SYSTEM PROMPT: unlike the old OpenAI version, we do NOT send a
+// system prompt from here. Selene's background is already baked into the
+// model two ways — the SYSTEM directive in the Modelfile (used whenever the
+// model is invoked with no system message) and the LoRA fine-tuning itself
+// (training_data.jsonl). Keeping it out of this function means one less
+// place that background has to be kept in sync, and a smaller request body
+// to a CPU-bound VM where every token of prompt costs real latency.
 
 const MAX_HISTORY_MESSAGES = 20; // simple abuse guard
 const MAX_MESSAGE_LENGTH = 2000; // simple abuse guard
+const UPSTREAM_TIMEOUT_MS = 25000; // fail fast + clearly, rather than hang until Vercel's own function timeout
 
 module.exports = async function handler(req, res) {
-  // CORS: lock this down to your real domain once you know it, e.g.
-  // res.setHeader("Access-Control-Allow-Origin", "https://selenechan.dev");
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  // CORS: locked to your real domain via env var. Falls back to "*" only if
+  // you haven't set ALLOWED_ORIGIN yet — set it before going live.
+  const allowedOrigin = process.env.ALLOWED_ORIGIN || "*";
+  res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
@@ -52,9 +55,14 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    res.status(500).json({ error: "Server is missing ANTHROPIC_API_KEY" });
+  const endpoint = process.env.OLLAMA_ENDPOINT;
+  const model = process.env.OLLAMA_MODEL;
+  const apiSecret = process.env.OLLAMA_API_SECRET;
+
+  if (!endpoint || !model || !apiSecret) {
+    res.status(500).json({
+      error: "Server is missing OLLAMA_ENDPOINT, OLLAMA_MODEL, or OLLAMA_API_SECRET",
+    });
     return;
   }
 
@@ -83,30 +91,62 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    const anthropicResponse = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-6",
-        max_tokens: 1000,
-        system: SYSTEM_PROMPT,
-        messages: messages,
-      }),
-    });
+    // Guard against the VM being slow/unreachable so this function fails
+    // clearly instead of hanging until Vercel's own execution limit kills it.
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), UPSTREAM_TIMEOUT_MS);
 
-    const data = await anthropicResponse.json();
+    let ollamaResponse;
+    try {
+      ollamaResponse = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Api-Key": apiSecret,
+        },
+        body: JSON.stringify({
+          model,
+          max_tokens: 500,
+          messages,
+        }),
+        signal: controller.signal,
+      });
+    } finally {
+      clearTimeout(timeoutId);
+    }
 
-    if (!anthropicResponse.ok) {
-      res.status(anthropicResponse.status).json({ error: data.error || "Upstream error" });
+    if (!ollamaResponse.ok) {
+      let upstreamError = "Upstream error";
+      try {
+        const errData = await ollamaResponse.json();
+        upstreamError = errData.error || upstreamError;
+      } catch (_) {
+        // upstream didn't return JSON — ignore and use the generic message
+      }
+      res.status(ollamaResponse.status).json({ error: upstreamError });
       return;
     }
 
-    res.status(200).json(data);
+    const data = await ollamaResponse.json();
+
+    // Ollama's OpenAI-compatible endpoint (/v1/chat/completions) mirrors
+    // OpenAI's response shape, so this line is unchanged from the old
+    // OpenAI version: choices[0].message.content.
+    const reply =
+      data.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response just now.";
+
+    // Normalized response shape so the frontend doesn't need to know which
+    // provider is behind this endpoint.
+    res.status(200).json({ reply });
   } catch (err) {
+    if (err.name === "AbortError") {
+      console.error("chat proxy timeout: VM did not respond in time");
+      res.status(504).json({
+        error:
+          "The assistant is taking too long to respond — it may be waking up from idle. Please try again in a moment, or email Selene directly at seleneltchan@gmail.com.",
+      });
+      return;
+    }
     console.error("chat proxy error:", err);
     res.status(500).json({ error: "Something went wrong talking to the AI." });
   }
