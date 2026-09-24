@@ -1,9 +1,0 @@
-{
-  "name": "selene-portfolio",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Personal portfolio site for Selene Chan, with an AI chat assistant.",
-  "scripts": {
-    "dev": "vercel dev"
-  }
-}

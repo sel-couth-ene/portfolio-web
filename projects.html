@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project · Chan Lok Tung, Selene</title>
+    <meta name="description" content="Chan Lok Tung, Selene. AI undergraduate at NUS and Stanford IHP 2026, building ML research agents, clinical decision support and misinformation simulations." />
+    <link rel="icon" href="assets/img/sel.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;1,400&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="">
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="wordmark" href="index.html">Chan Lok Tung, Selene</a>
+        <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="siteNav">Menu</button>
+        <nav id="siteNav" class="site-nav" aria-label="Main">
+          <a href="experience.html">Work Experience</a>
+          <a href="projects.html" aria-current="page">Projects</a>
+          <a href="about.html">About Me</a>
+          <a href="ask.html">Chat 24/7</a>
+          <a href="assets/docs/Selene_Chan_Resume.pdf" target="_blank" rel="noopener">↗ Resume</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap">
+        <h1 class="page-title">Some interesting projects I've done ~~</h1>
+        <div class="work-grid">
+          <article class="project">
+            <p class="project-meta">TikTok TechJam 2026, Singapore, Aug 2026</p>
+            <h2 class="project-title">Autonomous Machine Learning Research Agent for Recommender Systems</h2>
+            <ul class="project-points"><li>Built an AI agent that iterates the full ML research loop: forming hypotheses, patching its own code, executing iterative optimization loops, verifying the results, then forming hypotheses again</li><li>Evaluated its performance against the Factorization Machine (FM) baseline on the KuaiRand-Pure short-video ranking benchmark</li></ul>
+            <p class="project-links"><a href="https://github.com/RayWHJ/TikTokTechJam" target="_blank" rel="noopener">GitHub</a><a href="https://devpost.com/software/swe-hell" target="_blank" rel="noopener">Details</a></p>
+          </article>
+          <article class="project">
+            <p class="project-meta">Hack Nation 6th Global AI Hackathon, US, Jul 2026</p>
+            <h2 class="project-title">Ensemble Model for Clinical Decision Support in Women’s Hormonal Health</h2>
+            <ul class="project-points"><li>Built a three-model ensemble, with male-only, female-only, mixed data, on ~3,700 patient records for PCOS and thyroid decisions</li><li>Shipped a Flask app with separate doctor and patient views for report upload, AI summaries, and centralized records across hospitals</li><li>Implemented doctor alerts when patient-reported symptoms cannot be confidently assessed, and when information was insufficient</li></ul>
+            <p class="project-links"><a href="https://abiibass.github.io/AbiramiBaskaranPortfolio/assets/img/portfolio/HackNation/artificially_unintelligent.html" target="_blank" rel="noopener">Showcase</a><a href="https://github.com/sel-couth-ene/HackNation_Aritificially_Unintelligent" target="_blank" rel="noopener">GitHub</a></p>
+          </article>
+          <article class="project">
+            <p class="project-meta">EchoEcho, NUS Orbital, Singapore, Second-Tier Achievement, May – Aug 2026</p>
+            <h2 class="project-title">Social Network Simulation of Misinformation Spread</h2>
+            <ul class="project-points"><li>Modeled misinformation spread with an Independent Cascade Model over a directed graph, with activation probability driven by virality of information, weights assigned to user actions, and node susceptibility</li><li>Assessed users’ information-evaluation behavior within the simulation using a Multi-Criteria Decision Analysis framework, based on decision accuracy, misinformation sharing, and habits of verifying new information</li><li>Built a full-stack application using React, React Router v7, PostgreSQL, and Cytoscape.js</li></ul>
+            <p class="project-links"><a href="https://github.com/valeriecyz/EchoEcho" target="_blank" rel="noopener">GitHub</a><a href="https://drive.google.com/file/d/1s755XXHOslDFtVwi4pGzlPBpIebBDlbU/view" target="_blank" rel="noopener">Poster</a><a href="https://drive.google.com/file/d/16dJI5v2xm4ugmuRKmru8CUXKToZW5ufk/view" target="_blank" rel="noopener">Documentation</a><a href="https://drive.google.com/file/d/1xFhQJHyDDwsNLTLH_EeXrGpKmWxSB0M3/view" target="_blank" rel="noopener">Demo Video</a></p>
+          </article>
+          <article class="project">
+            <p class="project-meta">Stanford IHP, SymSys 103, Summer 2026</p>
+            <h2 class="project-title">Savings in Relearning After Machine Unlearning: A Study of Learning Traces in Language Models</h2>
+            <ul class="project-points"><li>Proposed testing whether language models relearn erased knowledge faster than when they learn new knowledge, borrowing savings in relearning from human memory</li><li>Designed a learn, unlearn, intervene, relearn study with rollback and novel-fact controls, measuring the target tokens needed to relearn</li></ul>
+            <p class="project-links"><a href="assets/docs/Research_Proposal.pdf" target="_blank" rel="noopener">Research Proposal</a></p>
+          </article>
+          <article class="project project--minor">
+            <div>
+              <p class="project-meta">Java desktop app, 2026</p>
+              <h2 class="project-title">Sel</h2>
+            </div>
+            <p>Task-tracking chatbot in JavaFX with a sliding command panel, date validation, duplicate detection, JUnit tests and crash-safe saves. 
+              <br><br>The Chat 24/7 function on this site borrows this design!</p>
+            <p class="project-links"><a href="https://github.com/sel-couth-ene/ip" target="_blank" rel="noopener">GitHub</a></p>
+          </article>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <ul class="footer-links">
+          <li><a href="mailto:e1718635@u.nus.edu">e1718635@u.nus.edu</a></li>
+          <li><a href="mailto:seleneltchan@gmail.com">seleneltchan@gmail.com</a></li>
+          <li><a href="tel:+6589647047">+65 8964 7047</a></li>
+          <li><a href="https://wa.me/85259733021" target="_blank" rel="noopener">WhatsApp +852 5973 3021</a></li>
+          <li><a href="https://www.linkedin.com/in/sel-ene/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/sel-couth-ene" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+        <a class="footer-source" href="https://github.com/sel-couth-ene/portfolio-web" target="_blank" rel="noopener">↗ This website on GitHub</a>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>

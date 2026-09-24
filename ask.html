@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ask Sel · Chan Lok Tung, Selene</title>
+    <meta name="description" content="Chan Lok Tung, Selene. AI undergraduate at NUS and Stanford IHP 2026, building ML research agents, clinical decision support and misinformation simulations." />
+    <link rel="icon" href="assets/img/sel.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;1,400&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="ask-page">
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="wordmark" href="index.html">Chan Lok Tung, Selene</a>
+        <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="siteNav">Menu</button>
+        <nav id="siteNav" class="site-nav" aria-label="Main">
+          <a href="experience.html">Work Experience</a>
+          <a href="projects.html">Projects</a>
+          <a href="about.html">About Me</a>
+          <a href="ask.html" aria-current="page">Chat 24/7</a>
+          <a href="assets/docs/Selene_Chan_Resume.pdf" target="_blank" rel="noopener">↗ Resume</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap">
+        <div class="ask-grid">
+          <div class="ask-intro">
+            <h1 class="page-title">Chat with me 24/7 ~~</h1>
+            <p>Type a keyword, such as <em>Python</em>, <em>RAG</em>, <em>leadership</em> or <em>GPA</em>, and I'll tell you more about it!</p>
+            <p>If something isn't on her résumé, Sel says so. Open <em>^ help</em> for every keyword.</p>
+          </div>
+          <div class="sel-window" role="region" aria-label="Sel chatbot">
+            <div class="sel-titlebar"><span>Sel</span></div>
+            <div class="sel-log" id="selLog" aria-live="polite"></div>
+            <div class="sel-help" id="selHelp" aria-hidden="true">
+              <p class="sel-help-title">Keywords you can use:</p>
+              <ul class="sel-help-list" id="selHelpList"></ul>
+            </div>
+            <form class="sel-inputbar" id="selForm" autocomplete="off">
+              <button type="button" class="sel-help-toggle" id="selHelpToggle" aria-expanded="false" aria-controls="selHelp"><span class="sel-caret">^</span>&nbsp; help</button>
+              <label class="visually-hidden" for="selInput">Type a keyword</label>
+              <input id="selInput" type="text" placeholder="Try typing background, or other keywords..." maxlength="200" />
+              <button type="submit" class="sel-send">Send</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <ul class="footer-links">
+          <li><a href="mailto:e1718635@u.nus.edu">e1718635@u.nus.edu</a></li>
+          <li><a href="mailto:seleneltchan@gmail.com">seleneltchan@gmail.com</a></li>
+          <li><a href="tel:+6589647047">+65 8964 7047</a></li>
+          <li><a href="https://wa.me/85259733021" target="_blank" rel="noopener">WhatsApp +852 5973 3021</a></li>
+          <li><a href="https://www.linkedin.com/in/sel-ene/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/sel-couth-ene" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+        <a class="footer-source" href="https://github.com/sel-couth-ene/portfolio-web" target="_blank" rel="noopener">↗ This website on GitHub</a>
+      </div>
+    </footer>
+    <script src="chatbot/knowledge.js"></script>
+    <script src="chatbot/sel.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
