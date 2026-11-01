@@ -247,16 +247,20 @@ main > .wrap { justify-content: safe center; }
   .project--minor p:not(.project-meta):not(.project-links) { font-size: 0.82rem; line-height: 1.35; }
 }
 
-/* ---------- v7: featured project across the full row, screenshot beside the text ---------- */
-.work-grid .project.project--featured { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: clamp(16px, 3vw, 32px); }
-.project--featured .project-body { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-self: stretch; }
-.project--featured .project-stack { margin-top: 0; padding-top: 8px; }
+/* ---------- v7: project rows, text beside the screenshot ---------- */
+.work-grid .project.project--row { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: clamp(16px, 3vw, 32px); }
+.project--row .project-body { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-self: stretch; }
+.project--row .project-stack { margin-top: 0; padding-top: 8px; }
+/* A row without a screenshot keeps its text in the same column as the others */
+.project--row .project-body:only-child { flex: 0 1 calc((100% - clamp(16px, 3vw, 32px)) / 2.3); }
 .project-preview { flex: 1.3 1 0; min-width: 0; display: block; border: 1px solid var(--rule-on-ink); }
 .project-preview img { display: block; width: 100%; height: auto; }
+.project-preview--crop img { aspect-ratio: 2 / 1; object-fit: cover; object-position: top; }
 .project-preview:hover { border-color: var(--on-ink); }
 @media (max-width: 900px) {
-  .work-grid .project.project--featured { flex-direction: column; align-items: stretch; }
-  .project--featured .project-preview { order: -1; }
+  .work-grid .project.project--row { flex-direction: column; align-items: stretch; }
+  .project--row .project-body:only-child { flex: none; }
+  .project--row .project-preview { order: -1; }
 }
 
 /* ---------- v8: four roles side by side ---------- */
@@ -267,11 +271,3 @@ main > .wrap { justify-content: safe center; }
   .roles { grid-template-columns: 1fr; }
   .role, .role + .role { padding: 14px 0; }
 }
-
-/* ---------- v9: screenshots inside the regular project cards ----------
-   Pinned to the bottom of the card above the links, so card text stays
-   aligned across the row whether or not a card has an image. */
-.work-grid .project:not(.project--featured) .project-preview { flex: none; margin-top: auto; }
-.work-grid .project:not(.project--featured) .project-preview + .project-links { margin-top: 0; }
-.work-grid .project:not(.project--featured) .project-preview img { aspect-ratio: 16 / 9; object-fit: cover; object-position: top; }
-.work-grid .project-points:has(+ .project-preview) { margin-bottom: 12px; }
