@@ -21,6 +21,16 @@ It also deploys to Vercel unchanged (import the repo, framework preset "Other").
 
 To preview locally: `python3 -m http.server` in this folder, then open http://localhost:8000.
 
+## Deploy on Streamlit Community Cloud
+
+`streamlit_app.py` wraps the same HTML pages in a Streamlit app; nothing in the site itself changes.
+
+1. Push the repo to GitHub, including `streamlit_app.py`, `requirements.txt`, `.streamlit/config.toml` and the `static` symlink (it points at `assets/`, so images and PDFs aren't duplicated).
+2. At [share.streamlit.io](https://share.streamlit.io): **Create app → Deploy a public app from GitHub**, pick this repo and branch, main file `streamlit_app.py`.
+3. Pages are addressed as `?page=home`, `experience`, `projects`, `about` and `ask`.
+
+To preview locally: `pip install -r requirements.txt`, then `streamlit run streamlit_app.py`.
+
 ## Files
 
 ```

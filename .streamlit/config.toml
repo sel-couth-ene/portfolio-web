@@ -1,0 +1,16 @@
+[server]
+# Serves ./static (a symlink to ./assets) at app/static/, for images and PDFs
+enableStaticServing = true
+
+[client]
+toolbarMode = "minimal"
+showSidebarNavigation = false
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "light"
+backgroundColor = "#f5eee9"
+primaryColor = "#2f4156"
+textColor = "#2f4156"
