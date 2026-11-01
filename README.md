@@ -25,8 +25,8 @@ To preview locally: `python3 -m http.server` in this folder, then open http://lo
 
 ```
 index.html               home (one screen)
-experience.html          Work Experience: Qiming, Unicorn Partners, AIESEC
-projects.html            Projects: TechJam, Hack Nation, EchoEcho, Savings in Relearning, Sel
+experience.html          Work Experience: Qiming, Unicorn Partners, AIESEC, NUSSU
+projects.html            Projects: SAF Supply Chain, TechJam, Hack Nation, EchoEcho, Savings in Relearning, Sel
 about.html               About Me: education and skills
 ask.html                 Sel chatbot
 style.css                design (palette, type, one-screen layouts, chat window)
@@ -69,9 +69,10 @@ The `^ help` panel shows six groups (`SEL_GROUPS` in `chatbot/knowledge.js`): wh
 | human-centered design & product | hci, human computer interaction, ux, user experience, ui, design, user research, human centered, human centred, human in the loop, product, product management, pm, figma, user testing, usability, accessibility, stakeholder, user |
 | responsible AI, safety & healthcare | responsible ai, ethics, ethical, fairness, bias, safety, ai safety, trust, trustworthy, explainable, explainability, xai, interpretability, healthcare, health, clinical, medical, women, misinformation, regulation, risk |
 | work experience, venture & strategy | experience, work experience, worked, work for, intern, internship, employer, company, venture, venture capital, vc, investment, investing, investor, due diligence, market, market research, market sizing, strategy, consulting, competitive analysis, swot, business, finance, fintech, aviation, air traffic, qiming, unicorn partners, startup |
-| leadership & teamwork | leadership, leader, lead, manage, management, team, teamwork, collaboration, collaborate, communication, presentation, public speaking, cross cultural, aiesec, initiative, mentor, ownership, soft skill, vice president, vp |
+| leadership & teamwork | leadership, leader, lead, manage, management, team, teamwork, collaboration, collaborate, communication, presentation, public speaking, cross cultural, aiesec, initiative, mentor, ownership, soft skill, vice president, vp, nussu, student union, business committee, deputy director, director, sponsor, sponsorship, partnership, corporate partnership, event, event management, budget, budgeting |
 | hackathons & shipping fast | hackathon, prototype, ship, shipping, deadline, fast, pressure, award, achievement, orbital, competition |
 | all projects | project, projects, portfolio, built, build, side project, financeasy, cryptocurrency, crypto, pyside, sel bot, java chatbot |
+| SAF supply chain optimisation | saf, sustainable aviation fuel, aviation fuel, supply chain, airbus, autonomoussg, autonomous sg, milp, mixed integer linear programming, mixed integer, linear programming, integer programming, operations research, pulp, highs, kalimantan, biomass, refinery, refineries, depot, streamlit, logistics, facility location, network optimisation, network optimization, optimality gap |
 | EchoEcho project | echoecho, echo echo, echo chamber, social network, simulation, graph, independent cascade, icm, network |
 | TikTok TechJam research agent | techjam, tiktok, kuairand, research agent, recommender system, short video |
 | Hack-Nation clinical ensemble | hack nation, hacknation, artificially unintelligent, pcos, thyroid, hormonal, women s health, clinical decision support |

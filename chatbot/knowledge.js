@@ -25,7 +25,7 @@ window.SEL_KNOWLEDGE = [
     answer:
       "Selene (Chan Lok Tung) is an AI undergraduate at the National University of Singapore on the Science &amp; Technology Undergraduate Scholarship, with minors in Data Analytics and Language Science. " +
       "This summer she completed Stanford's International Honors Program with a 4.0 GPA. " +
-      "Her work sits where machine learning meets people: an autonomous ML research agent (TikTok TechJam), a clinical decision-support ensemble (Hack-Nation), a misinformation simulator (NUS Orbital), and aviation-AI research at Qiming Venture Partners.",
+      "Her work sits where machine learning meets people: a team-built supply-chain optimiser for sustainable aviation fuel (AutonomousSG), an autonomous ML research agent (TikTok TechJam), a clinical decision-support ensemble (Hack-Nation), a misinformation simulator (NUS Orbital), and aviation-AI research at Qiming Venture Partners.",
   },
   {
     id: "ml",
@@ -39,7 +39,8 @@ window.SEL_KNOWLEDGE = [
       "supervised", "training", "feature engineering", "ai",
     ],
     answer:
-      "Three places to look. <b>TikTok TechJam 2026</b>: she built an agent that runs the ML research loop on its own and evaluated it against a Factorization Machine baseline on the KuaiRand-Pure short-video ranking benchmark. " +
+      "Four places to look. <b>AutonomousSG 2026</b>: her team built a Mixed-Integer Linear Programming model (PuLP + HiGHS) that sites depots and refineries for sustainable aviation fuel across Kalimantan. " +
+      "<b>TikTok TechJam 2026</b>: she built an agent that runs the ML research loop on its own and evaluated it against a Factorization Machine baseline on the KuaiRand-Pure short-video ranking benchmark. " +
       "<b>Hack-Nation 2026</b>: a three-model ensemble (male-only, female-only and mixed data) over ~3,700 patient records for PCOS and thyroid decisions. " +
       "<b>Coursework</b>: machine-learning optimisation at NUS, plus a Stanford research proposal on machine unlearning.",
   },
@@ -71,7 +72,7 @@ window.SEL_KNOWLEDGE = [
     answer:
       "She's minoring in <b>Data Analytics</b> at NUS, with probability &amp; statistics and database systems in her coursework. " +
       "In practice: she assessed users' information-evaluation behaviour in EchoEcho with a <b>Multi-Criteria Decision Analysis</b> framework (decision accuracy, misinformation sharing, verification habits), " +
-      "and she prepared two clinical cohorts for the Hack-Nation ensemble. As a numbers example from leadership, she raised AIESEC NUS's exchange participation rate from 19.2% to 23.8%.",
+      "she prepared two clinical cohorts for the Hack-Nation ensemble, and she built a Streamlit dashboard showing facility locations, transport flows and cost breakdowns for the SAF supply-chain model. As a numbers example from leadership, she raised AIESEC NUS's exchange participation rate from 19.2% to 23.8%.",
   },
   {
     id: "swe",
@@ -85,7 +86,7 @@ window.SEL_KNOWLEDGE = [
       "gradle", "oop", "object oriented", "cytoscape", "coding", "programming", "programming language", "code",
     ],
     answer:
-      "Languages: <b>Python, JavaScript, SQL and Java</b>. Frameworks and tools: React, React Router v7, Flask, PostgreSQL, Cytoscape.js, Git. " +
+      "Languages: <b>Python, JavaScript, SQL and Java</b>. Frameworks and tools: React, React Router v7, Flask, PostgreSQL, Cytoscape.js, Streamlit, PuLP, Git. " +
       "She shipped a React + PostgreSQL app for NUS Orbital, a Flask app with separate doctor and patient views for Hack-Nation, " +
       "and <a href='https://github.com/sel-couth-ene/ip' target='_blank' rel='noopener'>Sel</a>, a Java/JavaFX desktop chatbot with a test suite, Gradle build and crash-safe saving. " +
       "I'm the web version of that bot.",
@@ -146,7 +147,8 @@ window.SEL_KNOWLEDGE = [
     ],
     answer:
       "Two research internships in Hong Kong in 2025. At <b>Qiming Venture Partners</b> she identified the Middle East as aerospace AI's fastest-growing market (9.31% forecast CAGR), profiled two air-traffic-control vendors (TCT, 688015.SH, and the startup NoamAI) and examined risks in digital twins and explainable AI for ATC. " +
-      "At <b>Unicorn Partners</b> she analysed the products launched at Google I/O 2025 and what they meant for stakeholder adoption.",
+      "At <b>Unicorn Partners</b> she analysed the products launched at Google I/O 2025 and what they meant for stakeholder adoption. " +
+      "Alongside her studies she holds two student leadership roles, at AIESEC in NUS and NUSSU. Ask about <i>leadership</i>.",
   },
   {
     id: "leadership",
@@ -157,10 +159,14 @@ window.SEL_KNOWLEDGE = [
       "leadership", "leader", "lead", "manage", "management", "team", "teamwork", "collaboration", "collaborate",
       "communication", "presentation", "public speaking", "cross cultural", "aiesec", "initiative", "mentor",
       "ownership", "soft skill", "vice president", "vp",
+      "nussu", "student union", "business committee", "deputy director", "director", "sponsor", "sponsorship",
+      "partnership", "corporate partnership", "event", "event management", "budget", "budgeting",
     ],
     answer:
       "Since January 2026 she has been <b>Vice President, Outgoing Global Exchange at AIESEC in NUS</b>, leading a 16-person committee that helps students reach volunteering and internship placements in 15 countries. " +
-      "Her targeted campaigns raised the participation rate from 19.2% to 23.8%. Every project on this site was also a team build under hackathon or programme deadlines.",
+      "Her targeted campaigns raised the participation rate from 19.2% to 23.8%. " +
+      "Since October 2026 she has also been <b>Deputy Director of the Business Committee at the NUS Students' Union (NUSSU)</b>: she leads corporate sponsor partnerships through sponsorship proposals for NUSSU initiatives, runs corporate events and sponsorship activities (budgets, logistics, promotional materials), and manages the sponsor database while refining sponsorship guidelines and processes. " +
+      "Every project on this site was also a team build under hackathon or programme deadlines.",
   },
   {
     id: "hackathon",
@@ -172,7 +178,8 @@ window.SEL_KNOWLEDGE = [
       "deadline", "fast", "pressure", "award", "achievement", "orbital", "competition",
     ],
     answer:
-      "Three builds in summer 2026: <b>TikTok TechJam</b> (Aug, Singapore) with the autonomous ML research agent; <b>Hack-Nation 6th Global AI Hackathon</b> (Jul, US) with the women's hormonal-health ensemble; and <b>NUS Orbital</b> (May–Aug), where EchoEcho earned a <b>Second-Tier Achievement</b>.",
+      "Most recently, <b>AutonomousSG 2026</b> (Oct, Singapore), Airbus Challenge #3, where her team built a MILP optimiser for a sustainable aviation fuel supply chain. " +
+      "Before that, three builds in summer 2026: <b>TikTok TechJam</b> (Aug, Singapore) with the autonomous ML research agent; <b>Hack-Nation 6th Global AI Hackathon</b> (Jul, US) with the women's hormonal-health ensemble; and <b>NUS Orbital</b> (May–Aug), where EchoEcho earned a <b>Second-Tier Achievement</b>.",
   },
   {
     id: "projects",
@@ -180,9 +187,27 @@ window.SEL_KNOWLEDGE = [
     show: ["projects"],
     keywords: ["project", "projects", "portfolio", "built", "build", "side project", "sel bot", "java chatbot"],
     answer:
-      "Five projects, newest first: an <b>Autonomous Machine Learning Research Agent for Recommender Systems</b> (TikTok TechJam, Aug 2026); an <b>Ensemble Model for Clinical Decision Support in Women’s Hormonal Health</b> (Hack Nation, Jul 2026); " +
+      "Six projects, newest first: <b>SAF Supply Chain Optimisation</b> (AutonomousSG 2026, Airbus Challenge #3, Oct 2026); an <b>Autonomous Machine Learning Research Agent for Recommender Systems</b> (TikTok TechJam, Aug 2026); an <b>Ensemble Model for Clinical Decision Support in Women’s Hormonal Health</b> (Hack Nation, Jul 2026); " +
       "<b>EchoEcho</b>, a Social Network Simulation of Misinformation Spread (NUS Orbital, May – Aug 2026, Second-Tier Achievement); a Stanford research proposal, <a href='assets/docs/Research_Proposal.pdf' target='_blank' rel='noopener'><b>Savings in Relearning After Machine Unlearning</b></a> (Summer 2026); and " +
       "<a href='https://github.com/sel-couth-ene/ip' target='_blank' rel='noopener'>Sel</a>, a Java/JavaFX task chatbot. Type a project name for detail.",
+  },
+  {
+    id: "saf",
+    group: "projects",
+    show: ["SAF", "supply chain", "MILP"],
+    boost: 2,
+    label: "SAF supply chain optimisation",
+    keywords: [
+      "saf", "sustainable aviation fuel", "aviation fuel", "supply chain", "airbus", "autonomoussg", "autonomous sg",
+      "milp", "mixed integer linear programming", "mixed integer", "linear programming", "integer programming",
+      "operations research", "pulp", "highs", "kalimantan", "biomass", "refinery", "refineries", "depot",
+      "streamlit", "logistics", "facility location", "network optimisation", "network optimization", "optimality gap",
+    ],
+    answer:
+      "At <b>AutonomousSG 2026</b> (Airbus Challenge #3, Oct 2026), Selene and her team built a <b>Mixed-Integer Linear Programming</b> model in Python with PuLP and the HiGHS solver to choose depot and refinery locations and plan biomass-to-SAF transport across Kalimantan. " +
+      "The network covers 80 biomass sites and four airports and meets 1,200 kt of annual sustainable aviation fuel demand at US$893.9M in annual cost, within a documented 4.17% optimality gap. " +
+      "An interactive Streamlit dashboard shows the facility locations, transport flows, cost breakdown and network decisions. " +
+      "<a href='https://saf-network-optimizer.streamlit.app/' target='_blank' rel='noopener'>Live demo</a>, <a href='https://github.com/engsheng/saf-network-optimizer' target='_blank' rel='noopener'>GitHub</a>, <a href='https://nus.edu.sg/cfg/events/details/4478' target='_blank' rel='noopener'>hackathon page</a>.",
   },
   {
     id: "echoecho",
@@ -283,7 +308,7 @@ window.SEL_GAPS = {
 window.SEL_GROUPS = [
   { id: "about", label: "who she is, education, languages", show: ["background", "GPA", "languages"] },
   { id: "skills", label: "technical skills", show: ["machine learning", "RAG", "Python", "data analysis"] },
-  { id: "projects", label: "what she has built", show: ["projects", "TechJam", "Hack-Nation", "EchoEcho"] },
+  { id: "projects", label: "what she has built", show: ["projects", "SAF", "TechJam", "Hack-Nation", "EchoEcho"] },
   { id: "experience", label: "internships and leadership", show: ["work experience", "venture capital", "leadership"] },
   { id: "research", label: "research and responsible AI", show: ["research", "healthcare", "explainable"] },
   { id: "contact", label: "availability and contact", show: ["contact", "hire", "résumé"] },
