@@ -83,7 +83,8 @@ document.addEventListener("click", (e) => {
 """
 
 
-@st.cache_data
+# Not cached: the files are small, and re-reading them means a push that only
+# edits HTML/CSS shows up without restarting the app.
 def build(file: str) -> tuple[str, str]:
     html = (ROOT / file).read_text(encoding="utf-8")
     title = re.search(r"<title>(.*?)</title>", html, re.S).group(1).strip()
