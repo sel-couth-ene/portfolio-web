@@ -267,3 +267,11 @@ main > .wrap { justify-content: safe center; }
   .roles { grid-template-columns: 1fr; }
   .role, .role + .role { padding: 14px 0; }
 }
+
+/* ---------- v9: screenshots inside the regular project cards ----------
+   Pinned to the bottom of the card above the links, so card text stays
+   aligned across the row whether or not a card has an image. */
+.work-grid .project:not(.project--featured) .project-preview { flex: none; margin-top: auto; }
+.work-grid .project:not(.project--featured) .project-preview + .project-links { margin-top: 0; }
+.work-grid .project:not(.project--featured) .project-preview img { aspect-ratio: 16 / 9; object-fit: cover; object-position: top; }
+.work-grid .project-points:has(+ .project-preview) { margin-bottom: 12px; }
